@@ -26,8 +26,18 @@ pip install pillow requests
 python dream_generator.py
  
 
+
+## 网页界面运行方式
+安装完所有依赖后，直接运行：
+```bash
+python app.py
+ 
+
+打开浏览器访问  http://localhost:8080  就能在网页里点击按钮生成新梦境，搭配专属插画，体验感拉满~
+
+
+
 自定义扩展
 你可以直接修改代码里的元素列表，加入你自己喜欢的场景、角色和事件，还可以调整绘画提示词的风格，生成完全贴合你喜好的专属梦境~
 开源协议
 MIT License，欢迎大家提交 PR 一起扩充梦境元素库！
-
