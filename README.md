@@ -8,7 +8,7 @@
 - 🚀 依赖极少，安装完 pillow 和 requests 就能直接运行
 
 ## 快速开始
-1. 克隆项目到本地
+ 克隆项目到本地
 ```bash
 git clone https://github.com/你的用户名/RandomDreamGenerator.git
 cd RandomDreamGenerator
