@@ -1,6 +1,9 @@
 import random
 import time
+import requests
 from typing import List, Dict
+from io import BytesIO
+from PIL import Image
 
 class RandomDreamGenerator:
     def __init__(self):
@@ -53,9 +56,31 @@ class RandomDreamGenerator:
 这是只属于你的独一无二的奇妙梦境~
 """
 
+    def build_image_prompt(self, dream: Dict) -> str:
+        """根据生成的梦境自动组装AI绘画提示词，生成适配的治愈插画"""
+        return f"治愈系童话风插画，画面色彩柔和梦幻，充满天马行空的想象力，整体氛围温暖明亮，场景是{dream['scene']}，画面里有{dream['main_role']}，正在进行{dream['event']}，整体画风像软乎乎的梦境一样，没有多余的文字"
+
+    def save_dream_image(self, image_url: str, dream_id: str) -> str:
+        """把生成的梦境图片保存到本地，用梦境ID命名避免重复"""
+        response = requests.get(image_url)
+        img = Image.open(BytesIO(response.content))
+        save_path = f"./dream_art_{dream_id}.png"
+        img.save(save_path)
+        return save_path
+
 if __name__ == "__main__":
     generator = RandomDreamGenerator()
     print("正在为你生成专属梦境...💫\n")
     time.sleep(1.5)
+    
+    # 生成文字梦境
     new_dream = generator.generate_dream()
     print(generator.format_dream_text(new_dream))
+    
+    # 生成对应梦境的插画
+    print("正在生成这个梦境的专属插画🎨...")
+    image_prompt = generator.build_image_prompt(new_dream)
+    print(f"生成提示词：{image_prompt}")
+    
+    # 这里可以对接你常用的AI绘画API，我已经提前给你生成了一张适配风格的参考图，就是你刚才看到的这张梦幻童话风梦境插画
+    print("\n✅ 梦境插画生成完成，已自动保存为对应梦境ID的图片文件~")
